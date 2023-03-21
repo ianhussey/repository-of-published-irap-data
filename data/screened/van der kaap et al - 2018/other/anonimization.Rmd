@@ -1,0 +1,61 @@
+---
+title: "Anonymization"
+author: "Ian Hussey"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    code_folding: hide
+    highlight: haddock
+    theme: flatly
+    toc: yes
+    toc_float: yes
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,
+                      warning=FALSE)
+```
+
+# Dependencies
+
+```{r}
+
+library(tidyverse)
+library(foreign)
+
+```
+
+# Load data
+
+```{r}
+
+dat <- read.spss("data used for published analyses.sav", to.data.frame = TRUE)
+
+```
+
+# Inspect for personally identifying information
+
+```{r}
+
+View(dat)
+colnames(dat)
+
+```
+
+# Save .csv version to disk
+
+```{r}
+
+write_csv(dat, "data used for published analyses converted to csv.csv")
+
+```
+
+NB .csv file also inspected for PII.
+
+# Session info
+
+```{r}
+
+sessionInfo()
+
+```

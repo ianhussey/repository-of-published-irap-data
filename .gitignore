@@ -4,3 +4,5 @@
 *.Rhistory
 old/
 ~*
+# exclude materials received from authors, needs to be screened for personally identifying information first
+data/materials received from authors/

@@ -79,7 +79,7 @@ Counts and percentages of articles whose authors replied to my emails, reported 
 
 ```{r}
 
-data_requests|>
+data_requests |>
   pivot_longer(cols = c(replied_to_emails, reported_able_and_willing_to_share_data, shared_data),
                names_to = "metric",
                values_to = "response") |>
@@ -103,13 +103,26 @@ data_requests |>
   kable() |>
   kable_classic(full_width = FALSE)
 
-data_requests |>
+data_percent_data_sharing_statements <- data_requests |>
   mutate(data_sharing_statement = ifelse(data_sharing_statement == FALSE, FALSE, TRUE)) |>
   group_by(year) |>
   summarize(n_articles = n(),
-            percent_data_sharing_statement = round_half_up(mean(data_sharing_statement, na.rm = TRUE)*100, 1)) |>
+            percent_data_sharing_statement = round_half_up(mean(data_sharing_statement, na.rm = TRUE)*100, 1)) 
+
+data_percent_data_sharing_statements |>
   kable() |>
   kable_classic(full_width = FALSE)
+
+library(scales)
+
+ggplot(data_percent_data_sharing_statements, aes(year, percent_data_sharing_statement/100)) +
+  geom_col() + 
+  geom_text(aes(label = paste0(percent_data_sharing_statement, "%"), vjust = -0.3)) +
+  ylab("Articles with data availability statement") +
+  xlab("Year") +
+  theme_linedraw() +
+  scale_y_continuous(labels = scales::percent) +
+  theme(panel.grid.minor = element_blank())
   
 ```
 

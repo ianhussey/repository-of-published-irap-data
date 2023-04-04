@@ -130,19 +130,38 @@ Count and percentage of articles with data sharing statement that shared data by
 
 ```{r}
 
-data_requests|>
+counts <- data_requests|>
   drop_na(data_sharing_statement_type, data_sharing_statement_adhered_to) |>
   mutate(data_sharing_statement_adhered_to = as.logical(data_sharing_statement_adhered_to)) |>
   group_by(data_sharing_statement_type) |>
   summarize(n_sharing_statement_type = n(),
             n_sharing_statement_adhered_to = sum(data_sharing_statement_adhered_to, na.rm = TRUE),
-            percent_shared_data = round_half_up(mean(data_sharing_statement_adhered_to, na.rm = TRUE)*100, 1)) |>
+            percent_shared_data = round_half_up(mean(data_sharing_statement_adhered_to, na.rm = TRUE)*100, 1)) 
+
+counts |>
   kable() |>
   kable_classic(full_width = FALSE)
 
 ```
 
 Data was shared by some authors, but oddly no authors with promissory data sharing statements shared data when asked. I.e., data only came from actual data sharing statements and authors with no statements who nonetheless shared on request.
+
+## Chi square test
+
+Does availability statements predict sharing
+
+```{r}
+
+tab_results <- counts |>
+  select(n_sharing_statement_type, n_sharing_statement_adhered_to) |>
+  as.matrix()
+
+chisq.test(tab_results, correct = FALSE) |>
+  broom::tidy() |>
+  kable() |>
+  kable_classic(full_width = FALSE)
+
+```
 
 # Session info
 

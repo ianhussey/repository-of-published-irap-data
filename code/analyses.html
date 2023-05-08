@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ian Hussey" />
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-08" />
 
 <title>Analyses</title>
 
@@ -1893,7 +1893,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Analyses</h1>
 <h4 class="author">Ian Hussey</h4>
-<h4 class="date">01 May 2023</h4>
+<h4 class="date">08 May 2023</h4>
 
 </div>
 
@@ -1910,7 +1910,7 @@ border-radius: 0px;
 <div id="load-data" class="section level1">
 <h1>Load data</h1>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_requests <span class="ot">&lt;-</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">&quot;../data/requests for data/data requests.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;contacted&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">&quot;../data/results of data sharing requests.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;contacted&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data_sharing_statement =</span> <span class="fu">ifelse</span>(data_sharing_statement <span class="sc">==</span> <span class="st">&quot;NA&quot;</span>, <span class="cn">NA</span>, data_sharing_statement),</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data_sharing_statement_adhered_to =</span> <span class="fu">ifelse</span>(data_sharing_statement_adhered_to <span class="sc">==</span> <span class="st">&quot;NA&quot;</span>, <span class="cn">NA</span>, data_sharing_statement_adhered_to),</span>
@@ -2152,10 +2152,10 @@ replied_to_emails
 reported_able_and_willing_to_share_data
 </td>
 <td style="text-align:right;">
-21
+22
 </td>
 <td style="text-align:right;">
-40.4
+42.3
 </td>
 </tr>
 <tr>

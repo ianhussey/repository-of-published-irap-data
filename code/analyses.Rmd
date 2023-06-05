@@ -180,29 +180,17 @@ counts |>
 
 Data was shared by some authors, but oddly no authors with promissory data sharing statements shared data when asked. I.e., data only came from actual data sharing statements and authors with no statements who nonetheless shared on request.
 
-## Compare sharing by presence/absence of data availabity statement
+## Are promissory data availability statements associated with greater sharing upon request?
+
+Ie excluding cases with data sharing statements stating actual sharing upon publication. 
 
 Chi square test
 
-Does availability statements predict sharing
-
 ```{r}
 
-counts2 <- data_requests |>
-  mutate(data_sharing_statement_binary = ifelse(data_sharing_statement == FALSE, FALSE, TRUE)) |>
-  drop_na(data_sharing_statement_binary, shared_data) |>
-  group_by(data_sharing_statement_binary) |>
-  summarize(n_data_sharing_statement = n(),
-            n_shared_data = sum(shared_data, na.rm = TRUE),
-            percent_shared_data = round_half_up(mean(shared_data, na.rm = TRUE)*100, 1)) 
-
-counts2 |>
-  kable() |>
-  kable_classic(full_width = FALSE)
-
-
-tab_results <- counts2 |>
-  select(n_data_sharing_statement, n_shared_data) |>
+tab_results <- counts |>
+  filter(data_sharing_statement_type != "actual") |>
+  select(n, n_shared_data) |>
   as.matrix()
 
 chisq.test(tab_results, correct = FALSE) |>

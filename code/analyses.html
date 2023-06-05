@@ -11,7 +11,7 @@
 
 <meta name="author" content="Ian Hussey" />
 
-<meta name="date" content="2023-05-19" />
+<meta name="date" content="2023-06-05" />
 
 <title>Analyses</title>
 
@@ -1893,7 +1893,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">Analyses</h1>
 <h4 class="author">Ian Hussey</h4>
-<h4 class="date">19 May 2023</h4>
+<h4 class="date">05 June 2023</h4>
 
 </div>
 
@@ -2468,78 +2468,21 @@ data sharing statements shared data when asked. I.e., data only came
 from actual data sharing statements and authors with no statements who
 nonetheless shared on request.</p>
 </div>
-<div id="compare-sharing-by-presenceabsence-of-data-availabity-statement" class="section level2">
-<h2>Compare sharing by presence/absence of data availabity
-statement</h2>
+<div id="are-promissory-data-availability-statements-associated-with-greater-sharing-upon-request" class="section level2">
+<h2>Are promissory data availability statements associated with greater
+sharing upon request?</h2>
+<p>Ie excluding cases with data sharing statements stating actual
+sharing upon publication.</p>
 <p>Chi square test</p>
-<p>Does availability statements predict sharing</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>counts2 <span class="ot">&lt;-</span> data_requests <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data_sharing_statement_binary =</span> <span class="fu">ifelse</span>(data_sharing_statement <span class="sc">==</span> <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(data_sharing_statement_binary, shared_data) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(data_sharing_statement_binary) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_data_sharing_statement =</span> <span class="fu">n</span>(),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_shared_data =</span> <span class="fu">sum</span>(shared_data, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">percent_shared_data =</span> <span class="fu">round_half_up</span>(<span class="fu">mean</span>(shared_data, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>counts2 <span class="sc">|&gt;</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-data_sharing_statement_binary
-</th>
-<th style="text-align:right;">
-n_data_sharing_statement
-</th>
-<th style="text-align:right;">
-n_shared_data
-</th>
-<th style="text-align:right;">
-percent_shared_data
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-23.3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-31.8
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tab_results <span class="ot">&lt;-</span> counts2 <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(n_data_sharing_statement, n_shared_data) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tab_results, <span class="at">correct =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tab_results <span class="ot">&lt;-</span> counts <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(data_sharing_statement_type <span class="sc">!=</span> <span class="st">&quot;actual&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(n, n_shared_data) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tab_results, <span class="at">correct =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2560,10 +2503,10 @@ method
 <tbody>
 <tr>
 <td style="text-align:right;">
-0.2649652
+0.353524
 </td>
 <td style="text-align:right;">
-0.6067293
+0.552125
 </td>
 <td style="text-align:right;">
 1
@@ -2578,7 +2521,7 @@ Pearson’s Chi-squared test
 </div>
 <div id="session-info" class="section level1">
 <h1>Session info</h1>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.2.1 (2022-06-23)
 ## Platform: aarch64-apple-darwin20 (64-bit)
 ## Running under: macOS Ventura 13.3.1

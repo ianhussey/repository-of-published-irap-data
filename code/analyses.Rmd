@@ -34,7 +34,7 @@ library(kableExtra)
 ```{r}
 
 data_requests <- 
-  read_excel("../data/results of data sharing requests.xlsx", sheet = "contacted") |>
+  read_excel("../data/results of data sharing requests - blinded and shuffled.xlsx", sheet = "contacted") |>
   janitor::clean_names() |>
   mutate(data_sharing_statement = ifelse(data_sharing_statement == "NA", NA, data_sharing_statement),
          data_sharing_statement_adhered_to = ifelse(data_sharing_statement_adhered_to == "NA", NA, data_sharing_statement_adhered_to),

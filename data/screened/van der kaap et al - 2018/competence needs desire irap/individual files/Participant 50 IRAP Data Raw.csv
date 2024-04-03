@@ -1,0 +1,24 @@
+1,"Participant 50","Consistant","Target 1 Raw Latency",983,1123,1248,1232,1248,1373,1341,1155,967,1279,1653,1279,1217,1373,1420,1233,1139,1326,1482,1185,1233,1139,1342,1778,1107,1155,2481,1342,1029,1872,1607,2152
+1,"Participant 50","Consistant","Target 2 Raw Latency",1154,1076,1388,2028,1076,1779,1404,1810,982,1186,1404,1154,1139,1264,1435,2527,1108,1107,1357,1295,1123,1186,1560,1623,1248,1217,1170,1419,1295,1294,1389,2418
+1,"Participant 50","Consistant","Target 3 Raw Latency",1123,1185,1560,1498,1451,1965,1763,1685,1716,1139,1435,1170,1186,1264,1420,5444,1201,1092,1326,1232,1217,1248,1388,1420,1201,1061,1529,1108,1342,1233,1310,1873
+1,"Participant 50","Consistant","Target 4 Raw Latency",1123,2199,1311,2308,1404,1342,1357,1513,1029,1451,1342,1794,1311,1389,1732,1747,1014,1123,1326,1357,1217,1420,1311,1623,1108,1154,1248,1826,1029,1295,1451,1576
+1,"Participant 50","Consistant","Target 5 Raw Latency",1077,1326,1950,1762,1154,2028,1544,1856,983,1154,1592,1482,1201,4165,1919,2777,1092,1248,1466,1685,1216,1295,1529,1716,1092,1185,1763,1607,1404,1248,1794,2231
+1,"Participant 50","Consistant","Target 6 Raw Latency",1092,1108,1186,1731,1185,1108,1763,2153,1060,1092,1342,1248,1295,1076,1420,1388,1389,1124,1419,1311,1155,1155,1217,2340,1185,1201,1342,1279,1186,1201,1716,1264
+1,"Participant 50","Consistant","Target 7 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 8 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 9 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 10 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 11 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 12 Raw Latency",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1,"Participant 50","Consistant","Target 1 Accuracy","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct"
+1,"Participant 50","Consistant","Target 2 Accuracy","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct"
+1,"Participant 50","Consistant","Target 3 Accuracy","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong"
+1,"Participant 50","Consistant","Target 4 Accuracy","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong"
+1,"Participant 50","Consistant","Target 5 Accuracy","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong"
+1,"Participant 50","Consistant","Target 6 Accuracy","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong","Correct","Correct","Correct","Correct","Correct","Correct","Correct","Wrong"
+1,"Participant 50","Consistant","Target 7 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,"Participant 50","Consistant","Target 8 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,"Participant 50","Consistant","Target 9 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,"Participant 50","Consistant","Target 10 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,"Participant 50","Consistant","Target 11 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,"Participant 50","Consistant","Target 12 Accuracy",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

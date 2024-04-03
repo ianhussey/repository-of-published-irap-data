@@ -1,0 +1,3 @@
+data obtained via data sharing link in publication:
+
+"Data are available at https://www.researchgate.net/publication/346542029_careergender_study_data."

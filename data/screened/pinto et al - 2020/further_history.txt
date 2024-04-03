@@ -1,0 +1,795 @@
+## This is the history of the R session as I was analysing the data. The purpose is reproducibility. You have the data in the RData files in OSF. If you want to reproduce the analyses, you have some of the code written down here with the outcomes they produced. If you want to see this in R, save as Rhistory instead of txt. However, in order to work, you'll have to copy, paste and run each line anyways, so, why bother? 
+
+#R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+#Copyright (C) 2019 The R Foundation for Statistical Computing
+#Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+#R is free software and comes with ABSOLUTELY NO WARRANTY.
+#You are welcome to redistribute it under certain conditions.
+#Type 'license()' or 'licence()' for distribution details.
+
+#R is a collaborative project with many contributors.
+#Type 'contributors()' for more information and 'citation()' on how to cite R or R packages in publications.
+
+#Type 'demo()' for some demos, 'help()' for on-line help, or 'help.start()' for an HTML browser interface to help.
+#Type 'q()' to quit R.
+
+> etmsgalldata <- read.delim2("PUT/YOUR/PATH/HERE/etmsgalldata.txt")
+> View(etmsgalldata) ## Just to check whether it is alright.
+> etwppalldata <- read.delim2("PUT/YOUR/PATH/HERE/etwppalldata.txt")
+> View(etwppalldata) ## Just to check whether it is alright.
+> shapiro.test(etwppalldata$Gaze..Fixations..count.) ## Should yield:
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Fixations..count.
+W = 0.9609, p-value = 0.562
+
+> shapiro.test(etmsgalldata$Gaze..Fixations..count.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Fixations..count.
+W = 0.96732, p-value = 0.6976
+
+> var.test(etwppalldata$Gaze..Fixations..count.,etmsgalldata$Gaze..Fixations..count.)
+
+	F test to compare two variances
+
+data:  etwppalldata$Gaze..Fixations..count. and etmsgalldata$Gaze..Fixations..count.
+F = 0.74896, num df = 19, denom df = 19, p-value = 0.5348
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.2964484 1.8922167
+sample estimates:
+ratio of variances 
+         0.7489624 
+
+> t.test(etwppalldata$Gaze..Fixations..count.,etmsgalldata$Gaze..Fixations..count.,var.equal = TRUE)
+
+	Two Sample t-test
+
+data:  etwppalldata$Gaze..Fixations..count. and etmsgalldata$Gaze..Fixations..count.
+t = -0.66625, df = 38, p-value = 0.5093
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.4028366  0.7080998
+sample estimates:
+mean of x mean of y 
+ 3.116667  3.464035 
+
+> t.test(etwppalldata$Gaze..Fixations..count.,etmsgalldata$Gaze..Fixations..count.,paired = TRUE)
+
+	Paired t-test
+
+data:  etwppalldata$Gaze..Fixations..count. and etmsgalldata$Gaze..Fixations..count.
+t = -1.7447, df = 19, p-value = 0.09719
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.76408228  0.06934543
+sample estimates:
+mean of the differences 
+             -0.3473684 
+
+> disc<-(etwppalldata$Gaze..Fixations..count.-etmsgalldata$Gaze..Fixations..count.)
+> t.test(disc)
+
+	One Sample t-test
+
+data:  disc
+t = -1.7447, df = 19, p-value = 0.09719
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ -0.76408228  0.06934543
+sample estimates:
+ mean of x 
+-0.3473684 
+
+> shapiro.test(etwppalldata$Gaze..Fixations..count.s.)
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Fixations..count.s.
+W = 0.89428, p-value = 0.03226
+
+> hist(etwppalldata$Gaze..Fixations..count.s.,30)
+> shapiro.test(etmsgalldata$Gaze..Fixations..count.s.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Fixations..count.s.
+W = 0.9383, p-value = 0.2226
+
+> hist(etmsgalldata$Gaze..Fixations..count.s.,30)
+> t.test(etwppalldata$Gaze..Fixations..count.s.,etmsgalldata$Gaze..Fixations..count.s.,paired = TRUE)
+
+	Paired t-test
+
+data:  etwppalldata$Gaze..Fixations..count.s. and etmsgalldata$Gaze..Fixations..count.s.
+t = 1.5698, df = 19, p-value = 0.133
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.01642673  0.11500513
+sample estimates:
+mean of the differences 
+              0.0492892 
+
+> wilcox.test(etwppalldata$Gaze..Fixations..count.s.,etmsgalldata$Gaze..Fixations..count.s.)
+
+	Wilcoxon rank sum test
+
+data:  etwppalldata$Gaze..Fixations..count.s. and etmsgalldata$Gaze..Fixations..count.s.
+W = 211, p-value = 0.7788
+alternative hypothesis: true location shift is not equal to 0
+
+> wilcox.test(etwppalldata$Gaze..Fixations..count.s.,etmsgalldata$Gaze..Fixations..count.s., paired = TRUE)
+
+	Wilcoxon signed rank test
+
+data:  etwppalldata$Gaze..Fixations..count.s. and etmsgalldata$Gaze..Fixations..count.s.
+V = 149, p-value = 0.1054
+alternative hypothesis: true location shift is not equal to 0
+
+> shapiro.test()
+Error in stopifnot(is.numeric(x)) : 
+  argument "x" is missing, with no default
+> shapiro.test(etwppalldata$Gaze..Fixation.Duration.Mean..ms.)
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Fixation.Duration.Mean..ms.
+W = 0.88137, p-value = 0.01873
+
+> shapiro.test(etmsgalldata$Gaze..Fixation.Duration.Mean..ms.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Fixation.Duration.Mean..ms.
+W = 0.82958, p-value = 0.00247
+
+> wilcox.test(etwppalldata$Gaze..Fixation.Duration.Mean..ms.,etmsgalldata$Gaze..Fixation.Duration.Mean..ms.,paired = TRUE)
+
+	Wilcoxon signed rank test
+
+data:  etwppalldata$Gaze..Fixation.Duration.Mean..ms. and etmsgalldata$Gaze..Fixation.Duration.Mean..ms.
+V = 88, p-value = 0.5459
+alternative hypothesis: true location shift is not equal to 0
+
+> shapiro.test(etwppalldata$Gaze..Average.Saccade.Length..px.)
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Average.Saccade.Length..px.
+W = 0.77919, p-value = 0.0004298
+
+> shapiro.test(etmsgalldata$Gaze..Average.Saccade.Length..px.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Average.Saccade.Length..px.
+W = 0.93224, p-value = 0.1705
+
+> wilcox.test(twppalldata$Gaze..Average.Saccade.Length..px.,etmsgalldata$Gaze..Average.Saccade.Length..px.,paired = TRUE)
+Error in wilcox.test(twppalldata$Gaze..Average.Saccade.Length..px., etmsgalldata$Gaze..Average.Saccade.Length..px.,  : 
+  object 'twppalldata' not found
+> wilcox.test(etwppalldata$Gaze..Average.Saccade.Length..px.,etmsgalldata$Gaze..Average.Saccade.Length..px.,paired = TRUE)
+
+	Wilcoxon signed rank test
+
+data:  etwppalldata$Gaze..Average.Saccade.Length..px. and etmsgalldata$Gaze..Average.Saccade.Length..px.
+V = 141, p-value = 0.1893
+alternative hypothesis: true location shift is not equal to 0
+
+> shapiro.test(etwppalldata$Gaze..Fixation.Connections.Length..px.)
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Fixation.Connections.Length..px.
+W = 0.95735, p-value = 0.4924
+
+> shapiro.test(etmsgalldata$Gaze..Fixation.Connections.Length..px.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Fixation.Connections.Length..px.
+W = 0.98476, p-value = 0.98
+
+> t.test(etwppalldata$Gaze..Fixation.Connections.Length..px.,etmsgalldata$Gaze..Fixation.Connections.Length..px.,paired=TRUE)
+
+	Paired t-test
+
+data:  etwppalldata$Gaze..Fixation.Connections.Length..px. and etmsgalldata$Gaze..Fixation.Connections.Length..px.
+t = -2.1703, df = 19, p-value = 0.04286
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -169.107165   -3.065902
+sample estimates:
+mean of the differences 
+              -86.08653 
+
+> shapiro.test(etwppalldata$Gaze..Path.velocity..px.s.)
+
+	Shapiro-Wilk normality test
+
+data:  etwppalldata$Gaze..Path.velocity..px.s.
+W = 0.95923, p-value = 0.5286
+
+> shapiro.test(etmsgalldata$Gaze..Path.velocity..px.s.)
+
+	Shapiro-Wilk normality test
+
+data:  etmsgalldata$Gaze..Path.velocity..px.s.
+W = 0.96978, p-value = 0.7502
+
+> t.test(etwppalldata$Gaze..Path.velocity..px.s.,etmsgalldata$Gaze..Path.velocity..px.s.,paired=0)
+
+	Welch Two Sample t-test
+
+data:  etwppalldata$Gaze..Path.velocity..px.s. and etmsgalldata$Gaze..Path.velocity..px.s.
+t = 0.27273, df = 35.679, p-value = 0.7866
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -51.85874  67.96738
+sample estimates:
+mean of x mean of y 
+ 257.6524  249.5981 
+
+> t.test(etwppalldata$Gaze..Path.velocity..px.s.,etmsgalldata$Gaze..Path.velocity..px.s.,paired=1)
+
+	Paired t-test
+
+data:  etwppalldata$Gaze..Path.velocity..px.s. and etmsgalldata$Gaze..Path.velocity..px.s.
+t = 0.50899, df = 19, p-value = 0.6166
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -25.06582  41.17445
+sample estimates:
+mean of the differences 
+               8.054317 
+
+> wppetirapd17ptcp <- read.delim2("C:/Users/rva/OneDrive/Pesquisas/Renato_Bortoloti/Equipe/Joana/artigo/FINAL/wppetirapd17ptcp.txt", row.names=1, na.strings="")
+>   View(wppetirapd17ptcp)
+> msgetirapd17ptcp <- read.delim2("C:/Users/rva/OneDrive/Pesquisas/Renato_Bortoloti/Equipe/Joana/artigo/FINAL/msgetirapd17ptcp.txt", row.names=1, na.strings="")
+>   View(msgetirapd17ptcp)
+> type(wppetirapd17ptcp$Gaze..Fixations..count.)
+Error in type(wppetirapd17ptcp$Gaze..Fixations..count.) : 
+  could not find function "type"
+> typeof(wppetirapd17ptcp$Gaze..Fixations..count.)
+[1] "double"
+> reg1<-lm(msgetirapd17ptcp$Gaze..Fixations..count.~msgetirapd17ptcp$MSG.Mean)
+> summary(reg1)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixations..count. ~ msgetirapd17ptcp$MSG.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1165 -1.1155  0.3738  0.8531  3.2631 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 3.3128     0.4677   7.083 3.73e-06 ***
+msgetirapd17ptcp$MSG.Mean  -0.6621     2.2733  -0.291    0.775    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.889 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.005623,	Adjusted R-squared:  -0.06067 
+F-statistic: 0.08483 on 1 and 15 DF,  p-value: 0.7748
+
+> sp(msgetirapd17ptcp$MSG.Mean,msgetirapd17ptcp$Gaze..Fixations..count.)
+> reg1<-lm(msgetirapd17ptcp$MSG.Mean~msgetirapd17ptcp$Gaze..Fixations..count.)
+> summary(reg1)
+
+Call:
+lm(formula = msgetirapd17ptcp$MSG.Mean ~ msgetirapd17ptcp$Gaze..Fixations..count.)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.30367 -0.13871 -0.01395  0.07678  0.50728 
+
+Coefficients:
+                                          Estimate Std. Error t value Pr(>|t|)
+(Intercept)                              -0.012808   0.110365  -0.116    0.909
+msgetirapd17ptcp$Gaze..Fixations..count. -0.008493   0.029161  -0.291    0.775
+
+Residual standard error: 0.214 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.005623,	Adjusted R-squared:  -0.06067 
+F-statistic: 0.08483 on 1 and 15 DF,  p-value: 0.7748
+
+> reg2<-lm(msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.~msgetirapd17ptcp$MSG.Mean)
+> summary(reg2)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms. ~ 
+    msgetirapd17ptcp$MSG.Mean)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-96.42 -53.27 -23.84  10.82 205.19 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 323.77      20.92  15.477 1.25e-10 ***
+msgetirapd17ptcp$MSG.Mean    89.85     101.68   0.884    0.391    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 84.51 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.04948,	Adjusted R-squared:  -0.01389 
+F-statistic: 0.7808 on 1 and 15 DF,  p-value: 0.3908
+
+> sp(msgetirapd17ptcp$MSG.Mean,msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.)
+> reg3<- lm(msgetirapd17ptcp$Gaze..Average.Saccade.Length..px.~msgetirapd17ptcp$MSG.Mean)
+> summary(reg3)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Average.Saccade.Length..px. ~ 
+    msgetirapd17ptcp$MSG.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-89.774 -25.752  -3.286  14.137  89.538 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 185.08      11.25  16.448 5.25e-11 ***
+msgetirapd17ptcp$MSG.Mean   -53.91      54.69  -0.986     0.34    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 45.46 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.06084,	Adjusted R-squared:  -0.001767 
+F-statistic: 0.9718 on 1 and 15 DF,  p-value: 0.3399
+
+> reg4 <- lm(msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~msgetirapd17ptcp$MSG.Mean)
+> summary(reg4)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    msgetirapd17ptcp$MSG.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-419.21 -164.75  -14.25  213.41  466.28 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 577.33      66.99   8.618  3.4e-07 ***
+msgetirapd17ptcp$MSG.Mean  -311.04     325.60  -0.955    0.355    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 270.6 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.05735,	Adjusted R-squared:  -0.005493 
+F-statistic: 0.9126 on 1 and 15 DF,  p-value: 0.3546
+
+> > reg5<-lm(msgetirapd17ptcp$Gaze..Fixations..count.~msgetirapd17ptcp$TT3)
+Error: unexpected '>' in ">"
+> reg5<-lm(msgetirapd17ptcp$Gaze..Fixations..count.~msgetirapd17ptcp$TT3)
+> summary(reg5)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixations..count. ~ msgetirapd17ptcp$TT3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.9354 -1.0899  0.3197  1.0071  3.3613 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            3.3527     0.4889   6.858 5.44e-06 ***
+msgetirapd17ptcp$TT3   0.1135     1.5029   0.076    0.941    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.894 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.00038,	Adjusted R-squared:  -0.06626 
+F-statistic: 0.005702 on 1 and 15 DF,  p-value: 0.9408
+
+> reg2<-lm(msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.~msgetirapd17ptcp$MSG.TT3)
+Error in model.frame.default(formula = msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms. ~  : 
+  tipo inválido (NULL) para variável 'msgetirapd17ptcp$MSG.TT3'
+> reg2<-lm(msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.~msgetirapd17ptcp$TT3)
+> summary(reg2)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms. ~ 
+    msgetirapd17ptcp$TT3)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-91.73 -56.21 -30.75  27.71 199.24 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            324.85      22.08  14.714 2.55e-10 ***
+msgetirapd17ptcp$TT3    42.98      67.87   0.633    0.536    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 85.54 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.02604,	Adjusted R-squared:  -0.03889 
+F-statistic: 0.4011 on 1 and 15 DF,  p-value: 0.5361
+
+> reg6 <- lm(msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~msgetirapd17ptcp$TT3)
+> summary(reg6)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    msgetirapd17ptcp$TT3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-422.60 -165.03   -5.88  177.47  519.12 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            583.88      71.78   8.135 7.01e-07 ***
+msgetirapd17ptcp$TT3   -56.34     220.65  -0.255    0.802    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 278.1 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.004328,	Adjusted R-squared:  -0.06205 
+F-statistic: 0.0652 on 1 and 15 DF,  p-value: 0.8019
+
+> reg7<-lm(wppetirapd17ptcp$Gaze..Fixations..count.~wppetirapd17ptcp$D.WPP.TT.Mean)
+> summary(reg7)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixations..count. ~ wppetirapd17ptcp$D.WPP.TT.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7065 -1.2293  0.3735  0.9950  2.9308 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)   
+(Intercept)                      3.1803     0.7902   4.025   0.0011 **
+wppetirapd17ptcp$D.WPP.TT.Mean  -0.2569     1.6699  -0.154   0.8798   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.675 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.001576,	Adjusted R-squared:  -0.06499 
+F-statistic: 0.02368 on 1 and 15 DF,  p-value: 0.8798
+
+> reg8<-lm(wppetirapd17ptcp$Gaze..Fixations..count.~wppetirapd17ptcp$TT1)
+> summary(reg8)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixations..count. ~ wppetirapd17ptcp$TT1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6898 -1.0950  0.4028  0.7964  2.4930 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            4.8127     0.7812   6.160 1.82e-05 ***
+wppetirapd17ptcp$TT1  -3.0096     1.2167  -2.474   0.0258 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.413 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.2897,	Adjusted R-squared:  0.2424 
+F-statistic: 6.118 on 1 and 15 DF,  p-value: 0.02582
+
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixations..count.,xlab = "Trial Type 1", ylab = "Gaze Fixations Count")
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixations..count.,xlab = "Trial Type 1", ylab = "Gaze Fixations Count", nogrid)
+Error in scatterplot.default(wppetirapd17ptcp$TT1, wppetirapd17ptcp$Gaze..Fixations..count.,  : 
+  object 'nogrid' not found
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixations..count.,xlab = "Trial Type 1", ylab = "Gaze Fixations Count", grid=FALSE)
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixations..count.,xlab = "Trial Type 1 D-IRAP scores", ylab = "Gaze Fixations Count", grid=FALSE)
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixations..count.,xlab = "Trial Type 1 D-IRAP scores", ylab = "Gaze Fixations Count", grid=FALSE, smooth = FALSE)
+> reg9<-lm(wppetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.~wppetirapd17ptcp$D.WPP.TT.Mean)
+> summary(reg9)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms. ~ 
+    wppetirapd17ptcp$D.WPP.TT.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-48.764 -27.069 -11.743   9.979 127.237 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                     288.987     20.633  14.006 5.09e-10 ***
+wppetirapd17ptcp$D.WPP.TT.Mean   -8.626     43.605  -0.198    0.846    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 43.73 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.002602,	Adjusted R-squared:  -0.06389 
+F-statistic: 0.03913 on 1 and 15 DF,  p-value: 0.8458
+
+> reg9<-lm(wppetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms.~wppetirapd17ptcp$TT1)
+> summary(reg9)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixation.Duration.Mean..ms. ~ 
+    wppetirapd17ptcp$TT1)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-49.73 -25.79 -10.15   8.44 127.50 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           283.536     24.212   11.71 6.03e-09 ***
+wppetirapd17ptcp$TT1    3.379     37.709    0.09     0.93    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 43.78 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.000535,	Adjusted R-squared:  -0.0661 
+F-statistic: 0.008029 on 1 and 15 DF,  p-value: 0.9298
+
+> reg10<-lm(wppetirapd17ptcp$Gaze..Average.Saccade.Length..px.~wppetirapd17ptcp$D.WPP.TT.Mean)
+> summary(reg10)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Average.Saccade.Length..px. ~ 
+    wppetirapd17ptcp$D.WPP.TT.Mean)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-85.58 -32.52 -11.24  20.72 189.01 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                      234.61      30.08   7.800 1.17e-06 ***
+wppetirapd17ptcp$D.WPP.TT.Mean   -85.41      63.56  -1.344    0.199    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 63.75 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.1074,	Adjusted R-squared:  0.04793 
+F-statistic: 1.806 on 1 and 15 DF,  p-value: 0.199
+
+> reg11<-lm(wppetirapd17ptcp$Gaze..Average.Saccade.Length..px.~wppetirapd17ptcp$TT1)
+> summary(reg11)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Average.Saccade.Length..px. ~ 
+    wppetirapd17ptcp$TT1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-69.938 -39.626  -5.289  16.452 206.570 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            186.38      37.12   5.022 0.000152 ***
+wppetirapd17ptcp$TT1    23.50      57.80   0.407 0.690051    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 67.11 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.0109,	Adjusted R-squared:  -0.05504 
+F-statistic: 0.1653 on 1 and 15 DF,  p-value: 0.6901
+
+> reg12<-lm(wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~wppetirapd17ptcp$D.WPP.TT.Mean)
+> summary(reg12)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    wppetirapd17ptcp$D.WPP.TT.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-371.92  -94.44  -29.27  130.02  492.29 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                       602.8      117.7   5.122 0.000125 ***
+wppetirapd17ptcp$D.WPP.TT.Mean   -211.2      248.7  -0.849 0.409223    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 249.5 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.04585,	Adjusted R-squared:  -0.01776 
+F-statistic: 0.7208 on 1 and 15 DF,  p-value: 0.4092
+
+> reg12<-lm(wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~wppetirapd17ptcp$TT1)
+> summary(reg12)
+
+Call:
+lm(formula = wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    wppetirapd17ptcp$TT1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-396.32 -104.96   10.32  102.06  447.38 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)             787.6      118.0   6.677 7.39e-06 ***
+wppetirapd17ptcp$TT1   -468.7      183.7  -2.551   0.0221 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 213.3 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.3026,	Adjusted R-squared:  0.2561 
+F-statistic: 6.509 on 1 and 15 DF,  p-value: 0.02214
+
+> > sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px.,xlab = "Trial Type 1 D-IRAP scores", ylab = "Gaze Fixations Connections Length for WhatsApp", grid=FALSE, smooth = FALSE)
+Error: unexpected '>' in ">"
+> sp(wppetirapd17ptcp$TT1,wppetirapd17ptcp$Gaze..Fixation.Connections.Length..px.,xlab = "Trial Type 1 D-IRAP scores", ylab = "Gaze Fixations Connections Length for WhatsApp icon", grid=FALSE, smooth = FALSE)
+> reg12<-lm(msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~wppetirapd17ptcp$TT3)
+> summary(reg12)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    wppetirapd17ptcp$TT3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-422.60 -165.03   -5.88  177.47  519.12 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            583.88      71.78   8.135 7.01e-07 ***
+wppetirapd17ptcp$TT3   -56.34     220.65  -0.255    0.802    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 278.1 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.004328,	Adjusted R-squared:  -0.06205 
+F-statistic: 0.0652 on 1 and 15 DF,  p-value: 0.8019
+
+> reg12<-lm(msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~msgetirapd17ptcp$TT3)
+> summary(reg12)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    msgetirapd17ptcp$TT3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-422.60 -165.03   -5.88  177.47  519.12 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            583.88      71.78   8.135 7.01e-07 ***
+msgetirapd17ptcp$TT3   -56.34     220.65  -0.255    0.802    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 278.1 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.004328,	Adjusted R-squared:  -0.06205 
+F-statistic: 0.0652 on 1 and 15 DF,  p-value: 0.8019
+
+> reg12<-lm(msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px.~msgetirapd17ptcp$MSG.Mean)
+> summary(reg12)
+
+Call:
+lm(formula = msgetirapd17ptcp$Gaze..Fixation.Connections.Length..px. ~ 
+    msgetirapd17ptcp$MSG.Mean)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-419.21 -164.75  -14.25  213.41  466.28 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 577.33      66.99   8.618  3.4e-07 ***
+msgetirapd17ptcp$MSG.Mean  -311.04     325.60  -0.955    0.355    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 270.6 on 15 degrees of freedom
+  (3 observations deleted due to missingness)
+Multiple R-squared:  0.05735,	Adjusted R-squared:  -0.005493 
+F-statistic: 0.9126 on 1 and 15 DF,  p-value: 0.3546
+
+> shapiro.test(wppetirapd17ptcp$TT1)
+
+	Shapiro-Wilk normality test
+
+data:  wppetirapd17ptcp$TT1
+W = 0.97363, p-value = 0.8783
+
+> shapiro.test(wppetirapd17ptcp$TT2)
+
+	Shapiro-Wilk normality test
+
+data:  wppetirapd17ptcp$TT2
+W = 0.98103, p-value = 0.9659
+
+> shapiro.test(wppetirapd17ptcp$TT3)
+
+	Shapiro-Wilk normality test
+
+data:  wppetirapd17ptcp$TT3
+W = 0.95756, p-value = 0.5861
+
+> shapiro.test(wppetirapd17ptcp$TT4)
+
+	Shapiro-Wilk normality test
+
+data:  wppetirapd17ptcp$TT4
+W = 0.96942, p-value = 0.8082
+
+> shapiro.test(msgetirapd17ptcp$TT4)
+
+	Shapiro-Wilk normality test
+
+data:  msgetirapd17ptcp$TT4
+W = 0.96942, p-value = 0.8082
+
+> t.test(wppetirapd17ptcp$TT1,wppetirapd17ptcp$TT2,paired = 1)
+
+	Paired t-test
+
+data:  wppetirapd17ptcp$TT1 and wppetirapd17ptcp$TT2
+t = 1.9881, df = 16, p-value = 0.06419
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.02273465  0.70861700
+sample estimates:
+mean of the differences 
+              0.3429412 
+
+> t.test(wppetirapd17ptcp$TT3,wppetirapd17ptcp$TT4,paired = 1)
+
+	Paired t-test
+
+data:  wppetirapd17ptcp$TT3 and wppetirapd17ptcp$TT4
+t = -1.3492, df = 16, p-value = 0.1961
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.3584663  0.0796428
+sample estimates:
+mean of the differences 
+             -0.1394118 
+
+> t.test(wppetirapd17ptcp$TT3,wppetirapd17ptcp$TT1,paired = 1)
+
+	Paired t-test
+
+data:  wppetirapd17ptcp$TT3 and wppetirapd17ptcp$TT1
+t = -8.4354, df = 16, p-value = 2.77e-07
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.8611966 -0.5152740
+sample estimates:
+mean of the differences 
+             -0.6882353 
+
+> t.test(wppetirapd17ptcp$TT2,wppetirapd17ptcp$TT4,paired = 1)
+
+	Paired t-test
+
+data:  wppetirapd17ptcp$TT2 and wppetirapd17ptcp$TT4
+t = 1.1763, df = 16, p-value = 0.2567
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.1651592  0.5769239
+sample estimates:
+mean of the differences 
+              0.2058824 
+
+> savehistory("C:/Users/rva/OneDrive/Pesquisas/Renato_Bortoloti/Equipe/Joana/artigo/Analise/history_further_analyses.Rhistory")
+> save.image("C:/Users/rva/OneDrive/Pesquisas/Renato_Bortoloti/Equipe/Joana/artigo/Analise/data_further_analyses.RData")
+> 

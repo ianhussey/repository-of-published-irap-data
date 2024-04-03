@@ -1,0 +1,5 @@
+note that data was shared in August 2023, after period considered by the study.
+
+From the authors: 
+
+"In the file, column "block" identify practice or test trials, "label" the trial label (Vaccine vs Covid), "valence" the rule to apply to the given label (is it positive or negative in this case?), "target" is the target adjective applied to the label (they are Italian positive or negative words) "tablerow" is just a technical matter from Psytoolkit, "keypress" is the actual key pressed, "acc" is the accuracy (1=correct, 2=wrong), "RT" is the reaction time of the response, and "target.val" indicates if the target express a positive or negative attributes (e.g., PERICOLOSO is negative as it means DANGEROUS)."
